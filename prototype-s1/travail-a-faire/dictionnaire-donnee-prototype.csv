@@ -1,0 +1,13 @@
+Nom , Signification , Type , Format , Obligatoire , Calculée
+id_redacteur , identifiant unique de auteur , int , Nombre enntier , Oui , Non
+nom_redacteur , nom complet de auteur , varchar , text , Oui , Non
+email_redcteur , email auteur unique , varchar , email , Oui , Non
+
+id_article , identifiant unique de article , int , nombre entier , Oui , Non
+titre , titre de article , varchar , texte , Oui , Non
+contenu , contenu de article , Texte , text long , Oui , Non
+image , image de article , varchar , url , Oui , Non
+date_publication , date publication de article , dateTime , YYY-MM-DD , Oui , Non
+
+id_categorie , identifiant unique de catégorie , int , nombre entier , Oui , Non
+nom_categorie , nom de categorie , varchar , texte, Oui , Non
