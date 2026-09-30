@@ -1,8 +1,11 @@
-flowchart LR
-    Utilisateur["Utilisateur"]
-    Systeme["Système de gestion des catégories"]
-    JSON[("Categories.json")]
+usecase-beta
+direction LR
 
-    Utilisateur -->|"Afficher les catégories"| Systeme
-    Utilisateur -->|"Ajouter une catégorie"| Systeme
-    Systeme -->|"Lire / modifier"| JSON
+actor Redacteur("Rédacteur")
+actor Visiteur("Visiteur")
+
+system [ "blog_des_articles" ]
+
+Redacteur -- "Rédige et gère les articles" -- system
+Redacteur -- "Gère les catégories" -- system
+Visiteur -- "Consulte les articles publiés" -- system

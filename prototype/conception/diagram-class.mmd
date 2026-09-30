@@ -1,22 +1,50 @@
 classDiagram
-    class Categorie {
-        -int id
-        -string nom
-        -string description
-        +getId() int
-        +getNom() string
-        +getDescription() string
-        +setId(int id) void
-        +setNom(string nom) void
-        +setDescription(string description) void
+    direction TB
+
+    class REDACTEUR {
+        -int id_redacteur
+        -string nom_redacteur
+        -string email_redacteur
+
+        +getIdRedacteur() int
+        +setIdRedacteur(int id) void
+        +getNomRedacteur() string
+        +setNomRedacteur(string nom) void
+        +getEmailRedacteur() string
+        +setEmailRedacteur(string email) void
     }
 
-    class GestionCategorie {
-        -string path_file
-        +__construct()
-        +getCategories()
-        +ajouterCategorie()
-        +traiterRequete()
+    class CATEGORIE {
+        -int id_categorie
+        -string nom_categorie
+
+        +getIdCategorie() int
+        +setIdCategorie(int id) void
+        +getNomCategorie() string
+        +setNomCategorie(string nom) void
     }
 
-    GestionCategorie --> Categorie
+    class ARTICLE {
+        -int id_article
+        -string titre
+        -string contenu
+        -string image
+        -datetime date_publication
+        -int id_redacteur
+        -int id_categorie
+
+        +getIdArticle() int
+        +setIdArticle(int id) void
+        +getTitre() string
+        +setTitre(string titre) void
+        +getContenu() string
+        +setContenu(string contenu) void
+        +getImage() string
+        +setImage(string image) void
+        +getDatePublication() datetime
+        +setDatePublication(datetime date) void
+    }
+
+    REDACTEUR "1" --> "0..*" ARTICLE : rédige
+    CATEGORIE "1" --> "0..*" ARTICLE : contient
+```
