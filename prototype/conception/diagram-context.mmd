@@ -1,0 +1,8 @@
+flowchart LR
+    Utilisateur["Utilisateur"]
+    Systeme["Système de gestion des catégories"]
+    JSON[("Categories.json")]
+
+    Utilisateur -->|"Afficher les catégories"| Systeme
+    Utilisateur -->|"Ajouter une catégorie"| Systeme
+    Systeme -->|"Lire / modifier"| JSON

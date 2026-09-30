@@ -1,0 +1,22 @@
+classDiagram
+    class Categorie {
+        -int id
+        -string nom
+        -string description
+        +getId() int
+        +getNom() string
+        +getDescription() string
+        +setId(int id) void
+        +setNom(string nom) void
+        +setDescription(string description) void
+    }
+
+    class GestionCategorie {
+        -string path_file
+        +__construct()
+        +getCategories()
+        +ajouterCategorie()
+        +traiterRequete()
+    }
+
+    GestionCategorie --> Categorie

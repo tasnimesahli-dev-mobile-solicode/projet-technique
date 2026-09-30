@@ -1,0 +1,24 @@
+sequenceDiagram
+    actor Utilisateur
+    participant JS as script.js
+    participant API as api.php
+    participant JSON as Categories.json
+
+    Utilisateur->>JS: Remplit le formulaire
+    Utilisateur->>JS: Clique sur Ajouter
+
+    JS->>JS: preventDefault()
+    JS->>JS: JSON.stringify()
+
+    JS->>API: POST catégorie
+    API->>JSON: Lire les catégories
+    JSON-->>API: Données JSON
+
+    API->>API: json_decode()
+    API->>API: Ajouter la catégorie
+    API->>API: json_encode()
+    API->>JSON: Enregistrer les données
+
+    API-->>JS: Réponse JSON
+    JS->>JS: afficherCategories()
+    JS-->>Utilisateur: Affiche la nouvelle catégorie
