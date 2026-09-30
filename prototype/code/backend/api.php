@@ -40,8 +40,7 @@ class GestionCategorie
         echo json_encode($categories);
     }
 
-    public function traiterRequete()
-    {
+    public function traiterRequete(){
         $method = $_SERVER["REQUEST_METHOD"];
 
         if ($method === "GET") {
