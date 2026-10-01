@@ -26,11 +26,17 @@ class GestionCategorie
             true
         );
 
-        $categories[] = [
-            "id" => count($categories) + 1,
-            "nom" => $data["nom"],
-            "description" => $data["description"]
-        ];
+        $categorie = new categorie();
+
+           $categorie->setId(count($categories) + 1);
+           $categorie->setNom($data["nom"]);
+           $categorie->setDescription($data["description"]);
+
+          $categories[] = [
+               "id" => $categorie->getId(),
+               "nom" => $categorie->getNom(),
+               "description" => $categorie->getDescription()
+                              ];
 
         file_put_contents(
             $this->path_file,
