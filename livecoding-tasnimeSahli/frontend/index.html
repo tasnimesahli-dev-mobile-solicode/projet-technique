@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des categorie</title>
+    <script src="https://tailwindcss.com/docs"></script>
+</head>
+<body>
+    <h1>Gestion des catégorie</h1>
+  <button type="button" class="bg_bleau" id="nouveaucat">Ajouter un categorie</button>
+  <form id="form" hidden>
+    <label for="nom">Nom:</label>
+    <input type="text" id="nom"required>
+    <label for="description">Description</label>
+    <textarea id="description"required></textarea>
+    <button type="submit" id="submit">Ajouter</button>
+    <button type="annuler" id="annuler">Annuler</button>
+  </form>
+
+  <table border="1" class="rounded-lg bg-gray px-5 py-2">
+    <header>
+        <tr>
+            <th>ID</th>
+            <th>NOM</th>
+            <th>DESCRIPTION</th>
+        </tr>
+    </header>
+    <tbody id="tbody">
+    </tbody>
+  </table>
+</body>
+  <script src="js/script.js"></script>
+
+</html>
