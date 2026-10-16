@@ -1,59 +1,53 @@
-const api="../../backend/api.php";
-const ajouterButton=document.querySelector("#nouveaucat");
-const form=document.querySelector("#form");
-const nom=document.querySelector("#nom");
-const description=document.querySelector("#description");
-const annuler=document.querySelector("#annuler");
-const tbody=document.querySelector("#tbody");
-const submit=document.querySelector("#submit");
-ajouterButton.addEventListener("click" , ()=>{
+const api='../../backend/api.php';
+const add=document.getElementById('nouveaucat');
+const annuler=document.getElementById('annuler');
+const form=document.getElementById('form');
+const tbody=document.getElementById('tbody');
+add.addEventListener('click' , ()=>{
     form.hidden=false;
-    ajouterButton.hidden=true;
+    add.hidden=true;
 })
-annuler.addEventListener("click" , ()=>{
+annuler.addEventListener('click' , ()=>{
     form.reset();
     form.hidden=true;
-    ajouterButton.hidden=false;
+    add.hidden=false;
 })
-function afficherCategorie(){
+function getCategorie(){
     fetch(api)
     .then(response=>response.json())
     .then(categories=>{
         tbody.innerHTML="";
         categories.forEach(categorie => {
             const tr=document.createElement('tr');
-            tr.innerHTML+=`
+            tr.innerHTML=`
             <td>${categorie.id}</td>
             <td>${categorie.nom}</td>
             <td>${categorie.description}</td>
-            
-       `
-             tbody.appendChild(tr);
-
+            `
+            tbody.appendChild(tr);
         });
-
     })
-    .catch(error=>console.log)
+    .catch(error=>console.error(error))
 }
-afficherCategorie();
-    submit.addEventListener("submit" , (e)=>{
-        e.preventDefault();
-         fetch(api , {
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
+getCategorie();
+form.addEventListener('submit' , (e)=>{
+    e.preventDefault();
+    const nom=document.getElementById('nom').value;
+    const description=document.getElementById('description').value;
+    fetch(api , {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-            nom:nom.value,
-            description:description.value
-        })})
-        .then(response=>response.json)
-        .then(resultat=>{
-            afficherCategorie();
-            form.reset();
-            form.hidden=true;
-            ajouterButton.hidden=false;
+            nom:nom,
+            description:description
         })
-        .catch(error=>console.log(error))
-
     })
+    .then(response=>response.json())
+    .then(()=>{
+        getCategorie();
+        form.reset();
+        form.hidden=true;
+        add.hidden=false;
+    })
+    .catch(error=>console.error(error))
+})

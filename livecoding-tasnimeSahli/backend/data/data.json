@@ -1,11 +1,5 @@
 [
-    {
-        "id":"1",
-        "nom":"Technologie",
-        "description":"JDJFDIFJDFIDJOF"
-    },{
-        "id":"2",
-       "nom":"ART",
-        "description":"JDJFDIFJDFIDJOF"
-    }
-]
+{"id":1,"nom":"D\u00e9veloppement","description":"Articles sur le d\u00e9veloppement web"},
+{"id":2,"nom":"Design","description":"Articles sur le design et la cr\u00e9ation graphique"},
+{"id":3,"nom":"Technologie","description":"Actualit\u00e9s et nouveaut\u00e9s technologiques"},
+{"id":4,"nom":"Sport","description":"Articles et actualit\u00e9s sportives"}]

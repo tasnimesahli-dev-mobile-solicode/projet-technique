@@ -1,47 +1,42 @@
 <?php
 header('Content-Type:application/json');
-require_once __DIR__ ."/classes/categorie.php";
-
-class GestionCategories{
+require_once __DIR__ .'/classes/categorie.php';
+class GestionCategorie{
     private $PATH_FILE;
-    public function __construct() {
-        $this->PATH_FILE="data/data.json";
+    public function __construct(){
+        $this->PATH_FILE=__DIR__ .'/data/data.json';
     }
-    //getCategorie//
+
     public function getCategorie(){
-        $data=file_get_contents($this->PATH_FILE);
-        echo $data;
+        $categories=file_get_contents($this->PATH_FILE);
+        echo $categories;
     }
-    //AjouterCategorie//
-    public function ajouterCategorie(){
-        $contenu=file_get_contents($this->PATH_FILE);
-        $categories=json_decode($contenu , true);
-        $data=json_decode(file_get_contents("php://input"),true);
-        $categorie=new categorie();
-        $categorie->setId(count($categories)+1);
-        $categorie->setNom($data["nom"]);
-        $categorie->setDescription($data["description"]);
 
-        $categoriee[]=[
-            "id"=>$categorie->getId(),
-            "nom"=>$categorie->getNom(),
-            "description"=>$categorie->getDescription()
+    public function addCategorie(){
+        $categories=json_decode(file_get_contents($this->PATH_FILE),true);
+        $input=json_decode(file_get_contents('php://input'),true);
+        $newCat=new Categorie();
+        $newCat->setId(count($categories)+1);
+        $newCat->setNom($input['nom']);
+        $newCat->setDescription($input['description']);
+
+        $categories[]=[
+            "id"=>$newCat->getId(),
+            "nom"=>$newCat->getNom(),
+             "description"=>$newCat->getDescription()
         ];
-        file_put_contents($this->PATH_FILE ,json_encode($categoriee , JSON_PRETTY_PRINT));
-            echo json_encode($categories);
-
+        $update=json_encode($categories);
+        file_put_contents($this->PATH_FILE , $update);
+        echo $update;
     }
-    public function traiterRequete(){
-        $method=$_SERVER['REQUEST_METHOD'];
-        if($method==='GET'){
-            $this->getCategorie();
-        }
-        if($method==='POST'){
-            $this->ajouterCategorie();
+    public function traitementRequette(){
+        $methode=$_SERVER['REQUEST_METHOD'];
+        if($methode==='GET'){
+           $this-> getCategorie();
+        }if($methode==='POST'){
+            $this->addCategorie();
         }
     }
 }
-$api=new GestionCategories();
-$api->traiterRequete();
-
-
+$gestion=new GestionCategorie();
+$gestion->traitementRequette();
