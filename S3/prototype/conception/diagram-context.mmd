@@ -1,0 +1,11 @@
+usecase-beta
+direction LR
+
+actor Redacteur("Rédacteur")
+actor Visiteur("Visiteur")
+
+system [ "blog_des_articles" ]
+
+Redacteur -- "Rédige et gère les articles" -- system
+Redacteur -- "Gère les catégories" -- system
+Visiteur -- "Consulte les articles publiés" -- system

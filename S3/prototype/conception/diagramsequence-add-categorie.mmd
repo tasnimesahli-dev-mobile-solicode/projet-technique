@@ -1,0 +1,11 @@
+sequenceDiagram
+    actor  admin
+    participant system_streaming
+    admin->>system_streaming: demande la page d'ajouter genre
+    system_streaming-->>admin: afficher formulaire d'ajoute genre
+    admin->>system_streaming: saisit les donnees (nom,description)
+    alt champ vide
+        system_streaming-->>admin: refuser l'enregistrement avec messege d erreur(les champs sont obligatoire)
+    else cas nominal
+    system_streaming-->>admin: enregistrer l'article et redirect dans la list des genres
+    end
