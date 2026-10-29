@@ -4,12 +4,10 @@ header("Content-Type: application/json");
 
 require_once "classes/categories.php";
 
-class GestionCategorie
-{
+class GestionCategorie{
     private $path_file;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->path_file = "../data/categories.json";
     }
 
@@ -58,6 +56,5 @@ class GestionCategorie
         }
     }
 }
-
 $api = new GestionCategorie();
 $api->traiterRequete();
