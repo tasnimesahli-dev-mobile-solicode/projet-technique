@@ -10,6 +10,13 @@ const AnnulerButton = document.querySelector("#AnnulerButton");
 
 // API
 const api = "../backend/controllers/ControllerCategorie.php";
+// DOM du Spinner
+const btnSubmit = document.querySelector("#btnSubmit");
+const btnText = document.querySelector("#btnText");
+const spinner = document.querySelector("#spinner");
+
+// DOM du Toast
+const toast = document.querySelector("#toast");
 
 // Ajouter Button
 buttonAjouter.addEventListener("click", () => {
