@@ -13,104 +13,130 @@
 <body class="min-h-screen bg-gray-100 text-gray-800">
 
     <!-- Main Layout -->
-    <main class="mx-auto w-full max-w-5xl p-4 md:p-8">
+    <div class="flex min-h-screen">
 
-        <!-- Page Header -->
-        <header class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <!-- Sidebar: PC uniquement -->
+        <aside class="hidden md:flex w-64 shrink-0 min-h-screen flex-col bg-gray-900 p-5 text-white">
 
-            <div>
-                <h1 class="text-2xl font-bold md:text-3xl">
-                    Gestion des catégories
-                </h1>
+            <h2 class="mb-8 text-2xl font-bold">Dashboard</h2>
 
-                <p class="mt-2 text-sm text-gray-500">
-                    Ajouter et consulter les catégories.
+            <nav class="flex flex-col gap-3">
+                <a href="#" class="rounded-lg bg-gray-700 p-3">
+                    Dashboard
+                </a>
+
+                <a href="#" class="rounded-lg p-3 hover:bg-gray-700">
+                    Catégories
+                </a>
+
+                <a href="#" class="rounded-lg p-3 hover:bg-gray-700">
+                    Paramètres
+                </a>
+            </nav>
+
+        </aside>
+
+        <!-- Main Content -->
+        <main class="mx-auto w-full max-w-5xl flex-1 p-4 md:p-8">
+
+            <!-- Page Header -->
+            <header class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+
+                <div>
+                    <h1 class="text-2xl font-bold md:text-3xl">
+                        Gestion des catégories
+                    </h1>
+
+                    <p class="mt-2 text-sm text-gray-500">
+                        Ajouter et consulter les catégories.
+                    </p>
+                </div>
+
+                <button id="ajouterBtton" type="button" class="rounded-lg bg-blue-600 px-5 py-3 font-medium text-white hover:bg-blue-700">
+                    Ajouter catégorie
+                </button>
+
+            </header>
+
+            <!-- Category Form -->
+            <section id="formSection" class="mb-6 rounded-xl bg-white p-5 shadow-sm md:p-6" hidden>
+                <h2 class="mb-5 text-xl font-semibold">Nouvelle catégorie</h2>
+
+                <form id="formCategorie">
+                    <!-- Category Name -->
+                    <div class="mb-4">
+                        <label for="nom" class="mb-2 block font-medium">Nom de catégorie</label>
+                        <input id="nom" name="nom" type="text" placeholder="Exemple : Technologie" required class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
+                    </div>
+
+                    <!-- Category Description -->
+                    <div class="mb-5">
+                        <label for="description" class="mb-2 block font-medium">Description</label>
+                        <textarea id="description" name="description" placeholder="Décrire la catégorie..." required class="w-full resize-y rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"></textarea>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="flex flex-col gap-3 sm:flex-row">
+
+                        <button id="btnSubmit" type="submit" class="inline-flex items-center justify-center rounded-lg bg-green-600 px-5 py-3 font-medium text-white hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50">
+                            <span id="btnText">Ajouter</span>
+                            <span id="spinner" class="ml-3 hidden h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+                        </button>
+
+                        <button id="AnnulerButton" type="button" class="rounded-lg bg-gray-200 px-5 py-3 font-medium text-gray-700 hover:bg-gray-300">
+                            Annuler
+                        </button>
+
+                    </div>
+                </form>
+            </section>
+
+            <!-- Categories Table -->
+            <section class="overflow-hidden rounded-xl bg-white shadow-sm">
+
+                <div class="border-b border-gray-200 p-5 md:p-6">
+                    <h2 class="text-lg font-semibold">Liste des catégories</h2>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="whitespace-nowrap border-b px-5 py-4 text-sm font-semibold">
+                                    ID
+                                </th>
+
+                                <th class="whitespace-nowrap border-b px-5 py-4 text-sm font-semibold">
+                                    Nom
+                                </th>
+
+                                <th class="min-w-48 border-b px-5 py-4 text-sm font-semibold">
+                                    Description
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tbody">
+                            <!-- Categories will be displayed here -->
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <!-- Empty State -->
+                <p id="emptyMessage" class="p-6 text-center text-sm text-gray-500">
+                    Aucune catégorie disponible.
                 </p>
-            </div>
 
-<button id="ajouterBtton" type="button" class="rounded-lg bg-blue-600 px-5 py-3 font-medium text-white hover:bg-blue-700">
-                Ajouter catégorie</button>
+            </section>
 
-        </header>
+        </main>
 
-        <!-- Category Form -->
-        <section id="formSection" class="mb-6 rounded-xl bg-white p-5 shadow-sm md:p-6" hidden>
-<h2 class="mb-5 text-xl font-semibold">Nouvelle catégorie</h2>
-
- <form id="formCategorie">
-          <!-- Category Name -->
-        <div class="mb-4">
-    <label for="nom" class="mb-2 block font-medium">Nom de catégorie</label>
-    <input id="nom" name="nom" type="text" placeholder="Exemple : Technologie" required class="w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100">
-                </div>
-                <!-- Category Description -->
-                <div class="mb-5">
-    <label for="description" class="mb-2 block font-medium">Description</label>
-    <textarea id="description" name="description" placeholder="Décrire la catégorie..." required class="w-full resize-y rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"></textarea>
-                </div>
-                <!-- Form Actions -->
-                <div class="flex flex-col gap-3 sm:flex-row">
-
-    <button id="btnSubmit" type="submit" class="inline-flex items-center justify-center rounded-lg bg-green-600 px-5 py-3 font-medium text-white hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50">
-
-            <span id="btnText">Ajouter</span>
-        <span id="spinner" class="ml-3 hidden h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent">
-                        </span></button>
-    <button id="AnnulerButton" type="button" class="rounded-lg bg-gray-200 px-5 py-3 font-medium text-gray-700 hover:bg-gray-300">
-                        Annuler
-                    </button></div>
-            </form>
-        </section>
-
-        <!-- Categories Table -->
-        <section class="overflow-hidden rounded-xl bg-white shadow-sm">
-
-            <div class="border-b border-gray-200 p-5 md:p-6">
-                <h2 class="text-lg font-semibold">Liste des catégories</h2>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-
-                    <thead class="bg-gray-50">
-                        <tr>
-                            <th class="whitespace-nowrap border-b px-5 py-4 text-sm font-semibold">
-                                ID
-                            </th>
-
-                            <th class="whitespace-nowrap border-b px-5 py-4 text-sm font-semibold">
-                                Nom
-                            </th>
-
-                            <th class="min-w-48 border-b px-5 py-4 text-sm font-semibold">
-                                Description
-                            </th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="tbody">
-                        <!-- Categories will be displayed here -->
-                    </tbody>
-
-                </table>
-            </div>
-
-            <!-- Empty State -->
-            <p
-                id="emptyMessage"
-                class="p-6 text-center text-sm text-gray-500">
-                Aucune catégorie disponible.
-            </p>
-
-        </section>
-
-    </main>
+    </div>
 
     <!-- Toast Notifications -->
-    <div
-        id="toast"
-        class="fixed right-4 top-4 z-50 flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2"
-        aria-live="polite">
+    <div id="toast" class="fixed right-4 top-4 z-50 flex w-[calc(100%-2rem)] max-w-sm flex-col gap-2" aria-live="polite">
     </div>
 
     <!-- JavaScript -->

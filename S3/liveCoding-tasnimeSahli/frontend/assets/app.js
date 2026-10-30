@@ -7,8 +7,6 @@ const description = document.querySelector("#description");
 const buttonAjouter = document.querySelector("#ajouterBtton");
 const AnnulerButton = document.querySelector("#AnnulerButton");
 
-// API
-const api = "../backend/controllers/ControllerCategorie.php";
 // DOM du Spinner
 const btnSubmit = document.querySelector("#btnSubmit");
 const btnText = document.querySelector("#btnText");
@@ -17,6 +15,8 @@ const spinner = document.querySelector("#spinner");
 // DOM du Toast
 const toast = document.querySelector("#toast");
 
+// API
+const api = "../backend/controllers/ControllerCategorie.php";
 // Ajouter Button
 buttonAjouter.addEventListener("click", () => {
     formSection.hidden = false;
@@ -26,6 +26,13 @@ buttonAjouter.addEventListener("click", () => {
 // Ajouter Categorie
 form.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    // Bloquer le bouton
+    btnSubmit.disabled = true;
+
+    // Afficher le Spinner
+    btnText.textContent = "Enregistrement...";
+    spinner.classList.remove("hidden");
 
     fetch(api, {
         method: "POST",
@@ -39,12 +46,22 @@ form.addEventListener("submit", (e) => {
     })
     .then(response => response.json())
     .then(resultat => {
+         showToast("Catégorie a ajouter avec success" , "success");
+
         afficherCategories();
         form.reset();
         formSection.hidden = true;
         buttonAjouter.hidden = false;
     })
-    .catch(error => console.log(error));
+    .catch(error => {
+        console.log(error);
+        showToast("Erreur lors de ajoute","error")
+    })
+    .finally(()=>{
+        btnSubmit.disabled=false;
+        btnText.textContent="Ajouter";
+        spinner.classList.add("hidden")
+    })
 });
 
 // Annuler
@@ -81,6 +98,20 @@ function afficherCategories() {
     })
     .catch(error => console.log(error));
 }
+
+
+   function showToast(message ,type="success"){
+      const toast2=document.createElement('div');
+      toast2.className="text-white px-4 py-3 rounded shadow";
+      if(type==="success"){
+        toast2.classList.add("bg-green-500");
+      }else{
+        toast2.classList.add("bg-red-500");
+      }
+      toast2.textContent=message;
+      toast.appendChild(toast2);
+      setTimeout(()=>{toast2.remove();},3000)
+   }
 
 // Charger les catégories
 afficherCategories();
