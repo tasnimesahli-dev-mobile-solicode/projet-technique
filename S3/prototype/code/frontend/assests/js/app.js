@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 const formSection = document.querySelector("#formCategorie");
+=======
+const formSection = document.querySelector("#formSection");
+>>>>>>> c32a416f4ce440c9a2f6902cfadb108f84e6386d
 const form = document.querySelector("#formCategorie");
 const tbody = document.querySelector("#tbody");
 const emptyMessage = document.querySelector("#emptyMessage");
@@ -9,7 +13,11 @@ const buttonAjouter = document.querySelector("#ajouterBtton");
 const AnnulerButton = document.querySelector("#AnnulerButton");
 
 // API
+<<<<<<< HEAD
 const api = "../backend/controllers/CategorieController.php";
+=======
+const api = "../backend/controllers/ControllerCategorie.php";
+>>>>>>> c32a416f4ce440c9a2f6902cfadb108f84e6386d
 // DOM du Spinner
 const btnSubmit = document.querySelector("#btnSubmit");
 const btnText = document.querySelector("#btnText");
@@ -28,6 +36,7 @@ buttonAjouter.addEventListener("click", () => {
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
+<<<<<<< HEAD
     // Bloquer le bouton
     btnSubmit.disabled = true;
     btnText.textContent = "Enregistrement...";
@@ -35,6 +44,8 @@ form.addEventListener("submit", (e) => {
     // Afficher Spinner
     spinner.classList.remove("hidden");
 
+=======
+>>>>>>> c32a416f4ce440c9a2f6902cfadb108f84e6386d
     fetch(api, {
         method: "POST",
         headers: {
@@ -51,6 +62,7 @@ form.addEventListener("submit", (e) => {
         form.reset();
         formSection.hidden = true;
         buttonAjouter.hidden = false;
+<<<<<<< HEAD
 
         // Toast Success
         showToast("Catégorie ajoutée avec succès", "success");
@@ -69,6 +81,10 @@ form.addEventListener("submit", (e) => {
         // Cacher Spinner
         spinner.classList.add("hidden");
     });
+=======
+    })
+    .catch(error => console.log(error));
+>>>>>>> c32a416f4ce440c9a2f6902cfadb108f84e6386d
 });
 
 // Annuler
@@ -106,6 +122,7 @@ function afficherCategories() {
     .catch(error => console.log(error));
 }
 
+<<<<<<< HEAD
 // Fonction Toast
 function showToast(message, type = "success") {
     const toastMessage = document.createElement("div");
@@ -126,5 +143,7 @@ function showToast(message, type = "success") {
     }, 3000);
 }
 
+=======
+>>>>>>> c32a416f4ce440c9a2f6902cfadb108f84e6386d
 // Charger les catégories
 afficherCategories();
