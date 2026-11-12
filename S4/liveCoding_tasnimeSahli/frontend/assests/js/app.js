@@ -50,6 +50,9 @@ form.addEventListener("submit", (e) => {
         form.reset();
         formSection.hidden = true;
         buttonAjouter.hidden = false;
+        if(resultat.sucess==false){
+            throw new Error(resultat.error)
+        }
 
         // Toast Success
         showToast("Catégorie ajoutée avec succès", "success");

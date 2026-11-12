@@ -1,11 +1,15 @@
 <?php
-require_once __DIR__ . '/Categorie.php';
-class GestionCategorie{
-    private static $PATH_FILE= __DIR__ . '/../data/categories.json';
-
+require_once __DIR__ . '/../classes/Categorie.php';
+require_once __DIR__ . '/BaseService.php';
+require_once __DIR__ . '/../dao/CategorieDAO.php';
+class ServiceCategorie extends BaseService{
+    private CategorieDAO $categorieDAO;
+    public function __construct(){
+        $this->categorieDAO = new CategorieDAO();
+    }
     public function getCategories(): array {
-        $data=json_decode(file_get_contents(self::$PATH_FILE),true);
-        $categories=[];
+        $data=$this->categorieDAO->getAll();
+    $categories=[];
         foreach($data as $cat){
         $categories[]=[
             'id'=>$cat['id'],
@@ -15,13 +19,13 @@ class GestionCategorie{
         return $categories; 
     }
     public function ajouterCategorie(Categorie $categorie): void {
-      $data=json_decode(file_get_contents(self::$PATH_FILE),true);
+      $data=$this->categorieDAO->getAll();
       $id=count($data)+1;
       $data[]=[
         'id'=>$id,
         'nom'=>$categorie->getNom(),
         'description'=>$categorie->getDescription()
       ];
-      file_put_contents(self::$PATH_FILE , json_encode($data));
+      $this->categorieDAO->saveAll($data);
 }
 }
